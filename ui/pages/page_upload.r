@@ -27,8 +27,13 @@ tabItem(
                 width = 12,
                 p("You can upload your own BehaviorSpace Table output file (csv) here."),  # nolint: line_length_linter.
                 p("Then, you can observe data at Data Table session or visualise data at Dashboard session"), # nolint: line_length_linter.
-                fileInput("file", "Choose a file to upload")
+                fileInput(
+                    inputId = "file",
+                    label = "Choose a file to upload",
+                    accept = ".csv"
+                ),
+                uiOutput("file_state_ui_h4")
             )
         )
-    )
+    ),
 )

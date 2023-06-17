@@ -1,10 +1,3 @@
-library(shiny)
-library(shinyWidgets)
-library(shinydashboard)
-library(shinydashboardPlus)
-library(tidyverse)
-
-
 ui_header <- dashboardHeader(
     title = tagList(
         span(class = "logo-lg", "BehaviorViz"),
@@ -12,9 +5,9 @@ ui_header <- dashboardHeader(
     )
 )
 
-ui_siderbar <- source("ui_siderbar.r", local = TRUE)$value
+ui_siderbar <- source("./ui/ui_siderbar.r", local = TRUE)$value
 
-ui_body <- source("ui_body.r", local = TRUE)$value
+ui_body <- source("./ui/ui_body.r", local = TRUE)$value
 
 ui_footer <- dashboardFooter(
      left = "By Xiaotian Han",
@@ -27,13 +20,4 @@ ui <- dashboardPage(
     sidebar = ui_siderbar,
     body = ui_body,
     footer = ui_footer
-)
-
-server <- function(input, output) {
-
-}
-
-shinyApp(
-    ui = ui,
-    server = server
 )
