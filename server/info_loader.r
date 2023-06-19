@@ -127,10 +127,13 @@ maindata <- reactive({
     res$colnum <- list()
     res$colstr <- list()
 
-    stepcolnum <- which(names(res$data) == "[step]")
 
-    res$colnum$run_step <- c(1, stepcolnum)
-    res$colstr$run_step <- colnames(res$data)[res$colnum$run_step]
+    res$colnum$run <- c(1)
+    res$colstr$run <- colnames(res$data)[res$colnum$run]
+
+    stepcolnum <- which(names(res$data) == "[step]")
+    res$colnum$step <- c(stepcolnum)
+    res$colstr$step <- colnames(res$data)[res$colnum$step]
 
     if (stepcolnum != 2) {
         res$colnum$init_vars <- c(2 : (stepcolnum - 1))

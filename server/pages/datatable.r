@@ -62,16 +62,22 @@ output$maindata_panel <- renderUI({
         width = 12,
         collapsible = TRUE,
         awesomeCheckboxGroup(
-            inputId = "dt_sel_run_step",
-            label = "[run number]/[step]",
-            choices = maindata()$colstr$run_step,
-            selected = maindata()$colstr$run_step
+            inputId = "dt_sel_run",
+            label = "[run number]",
+            choices = maindata()$colstr$run,
+            selected = maindata()$colstr$run
         ),
         awesomeCheckboxGroup(
             inputId = "dt_sel_init_vars",
             label = "Initial Values of the Variables",
             choices = maindata()$colstr$init_vars,
             selected = maindata()$colstr$init_vars
+        ),
+        awesomeCheckboxGroup(
+            inputId = "dt_sel_step",
+            label = "[step]",
+            choices = maindata()$colstr$step,
+            selected = maindata()$colstr$step
         ),
         awesomeCheckboxGroup(
             inputId = "dt_sel_msr_metrics",
@@ -86,24 +92,35 @@ output$maindata_dt <- renderUI({
     if (file_state() != "right_file") {
         return()
     }
+    selected_col <- c(
+        input$dt_sel_run,
+        input$dt_sel_init_vars,
+        input$dt_sel_step,
+        input$dt_sel_msr_metrics)
+
     box(
-        title = "Main Data of the Output file",
+        title = "Main Data of the Output File",
         width = 12,
         datatable(
-            maindata()$data,
+            maindata()$data %>%
+            select(all_of(selected_col)),
             filter = "top",
             rownames = FALSE,
         ) %>%
             formatStyle(
-                maindata()$colstr$run_step,
+                input$dt_sel_run,
                 backgroundColor = "aqua"
             ) %>%
             formatStyle(
-                maindata()$colstr$init_vars,
+                input$dt_sel_init_vars,
                 backgroundColor = "lime"
             ) %>%
             formatStyle(
-                maindata()$colstr$msr_metrics,
+                input$dt_sel_step,
+                backgroundColor = "aqua"
+            ) %>%
+            formatStyle(
+                input$dt_sel_msr_metrics,
                 backgroundColor = "fuchsia"
             )
     )
