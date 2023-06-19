@@ -1,0 +1,22 @@
+
+/* metadata valuebox */
+/* for value of valuebox */
+#metadata h3 {
+  font-size: 20px;
+  white-space: normal;
+}
+
+/* for subtitle of valuebox */
+#metadata p {
+  font-size: 15px;
+}
+
+/* for subtitle of valuebox */
+#metadata i {
+  font-size: 40px;
+}
+
+/* for worldvar_title */
+#worldvar_title h4 {
+  color: #bec5cb;
+}

@@ -7,6 +7,18 @@ regex_behaviorspace_time <- "(\\d{2}/\\d{2}/\\d{4} \\d{2}:\\d{2}:\\d{2}:\\d{3} .
 ## load csv file info
 
 csv_file_header_info <- reactive({
+    if (is.null(input$file)){
+        return()
+    }
+
+    if (
+        nrow(
+            read.csv(file = input$file$datapath, header = FALSE)
+        ) < 8
+    ) {
+        return()
+    }
+
     res <- list()
     csv_file_header <- read.csv(
         text = readLines(input$file$datapath, n = 4),
@@ -63,6 +75,9 @@ worldvars <- reactive({
 })
 
 maindata <- reactive({
+    if (file_state() != "right_file") {
+        return()
+    }
     maindata_header <- read.csv(
         file = input$file$datapath,
         skip = 6,
@@ -73,13 +88,14 @@ maindata <- reactive({
     maindata_data <- read.csv(
         file = input$file$datapath,
         skip = 6,
-        header = TRUE
+        header = TRUE,
+        stringsAsFactors = TRUE
     )
     colnames(maindata_data) <- maindata_header
     res <- maindata_data %>% select_if(~ !all(is.na(.)))
 
     # for backend debugging
-    print(res)
+    print(head(res))
 
     return(res)
 })

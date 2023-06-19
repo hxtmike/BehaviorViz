@@ -117,25 +117,3 @@ file_state_ui <- reactive({
 output$file_state_ui_h4 <- renderUI({
     file_state_ui()$h4
 })
-
-output$file_state_page <- renderUI({
-    file_state_ui()$page
-})
-
-
-
-# test code
-output$test <- renderUI({
-    lapply(
-        seq(worldvars()),
-        function(i) { # apply for i since cannot get the colnames
-            valueBox(
-                value = worldvars()[1, i],
-                subtitle = colnames(worldvars())[i],
-                width = 2,
-                color = "yellow",
-                icon = icon("globe")
-            )
-        }
-    )
-})
