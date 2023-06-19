@@ -11,11 +11,9 @@ csv_file_header_info <- reactive({
         return()
     }
 
-    if (
-        nrow(
+    if (nrow(
             read.csv(file = input$file$datapath, header = FALSE)
-        ) < 8
-    ) {
+        ) < 8) {
         return()
     }
 

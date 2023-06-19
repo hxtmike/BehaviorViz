@@ -9,20 +9,20 @@ file_state <- reactive({
     print(basename(input$file$datapath))
 
     # if nrow < 8 return
-    if (
-        nrow(
+    if (nrow(
             read.csv(file = input$file$datapath, header = FALSE)
-        ) < 8
-    ) {
+        ) < 8) {
         return("wrong_csv")
     }
 
-    identifier_nonrunnumber <- read.csv(
+    identifier_header <- read.csv(
         file = input$file$datapath,
         skip = 6,
         nrow = 1,
         header = FALSE
-    )[1, 1] != "[run number]" # nolint
+    )
+
+    identifier_nonrunnumber <- identifier_header[1, 1] != "[run number]" # nolint
 
     if (is.na(csv_file_header_info()$nl_ver) |
         is.na(csv_file_header_info()$nl_filename) |
@@ -31,14 +31,22 @@ file_state <- reactive({
         return("wrong_csv")
     }
 
-    identifier_nonfirstint <- read.csv(
+    if (identifier_header[1, ] %>%
+        c() %>%
+        duplicated() %>%
+        any()) {
+       return("duplicated_colnames")
+    }
+
+    identifier_firstrow <- read.csv(
         file = input$file$datapath,
         skip = 6,
         nrow = 1,
         header = TRUE
-    )[1, 1] %>% mode() != "numeric"
+    )
 
-    if (identifier_nonfirstint) {
+    if (identifier_firstrow[1, 1] %>%
+        mode() != "numeric") {
         return("spreadsheet_output")
     }
 
@@ -88,6 +96,25 @@ file_state_ui <- reactive({
     if (file_state() == "spreadsheet_output") {
         res$h4 <- tags$h4(
             "The CSV file might be a Spreadsheet output of BehaviorSpace. Please upload Table output instead", # nolint: line_length_linter.
+            style = "color: orange"
+        )
+        res$page <- fluidRow(
+            column(
+                width = 6, offset = 3,
+                box(
+                    title = "Notice",
+                    width = 12,
+                    solidHeader = TRUE,
+                    status = "warning",
+                    res$h4
+                )
+            )
+        )
+    }
+
+    if (file_state() == "duplicated_colnames") {
+        res$h4 <- tags$h4(
+            "The CSV file contains duplicate column names, please process them before uploading", # nolint: line_length_linter.
             style = "color: orange"
         )
         res$page <- fluidRow(
