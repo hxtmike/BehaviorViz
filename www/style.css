@@ -2,21 +2,25 @@
 /* metadata valuebox */
 /* for value of valuebox */
 #metadata h3 {
-  font-size: 20px;
+  font-size: 15px;
   white-space: normal;
 }
 
 /* for subtitle of valuebox */
 #metadata p {
-  font-size: 15px;
+  font-size: 10px;
 }
 
 /* for subtitle of valuebox */
 #metadata i {
-  font-size: 40px;
+  font-size: 30px;
 }
 
 /* for worldvar_title */
 #worldvar_title h4 {
   color: #bec5cb;
+}
+
+#maindata_dt .box {
+  background-color: #F8F9F9;
 }

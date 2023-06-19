@@ -4,28 +4,25 @@ tabItem(
     uiOutput("file_state_page_datatable"),
 
     fluidRow(
-        uiOutput("metadata")
-    ),
-    fluidRow(
         column(
-            width = 12,
-            uiOutput("worldvar_title"),
-            tableOutput("worldvar_table")
+            width = 9,
+            uiOutput("metadata")
+        ),
+        column(
+            width = 3,
+            uiOutput("worldvars"),
         )
     ),
     fluidRow(
-        # datatable col
-        column(
-            width = 8,
-            DTOutput("maindata_dt")
-        ),
         # panel 1
         column(
             width = 2,
+            uiOutput("maindata_panel")
         ),
-        # panel 2
+        # datatable col
         column(
-            width = 2,
-        )
+            width = 10,
+            uiOutput("maindata_dt")
+        ),
     )
 )

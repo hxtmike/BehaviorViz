@@ -7,7 +7,7 @@ regex_behaviorspace_time <- "(\\d{2}/\\d{2}/\\d{4} \\d{2}:\\d{2}:\\d{2}:\\d{3} .
 ## load csv file info
 
 csv_file_header_info <- reactive({
-    if (is.null(input$file)){
+    if (is.null(input$file)) {
         return()
     }
 
@@ -41,6 +41,8 @@ csv_file_header_info <- reactive({
         pattern = regex_behaviorspace_time
     )[1, 2]
 
+    print("--------------------")
+    print("metadata")
     print(res)
 
     return(res)
@@ -66,9 +68,12 @@ worldvars <- reactive({
         header = FALSE
     )
     colnames(worldvars_data) <- worldvars_header
+    # when read csv, may occur some all NA column
     res <- worldvars_data %>% select_if(~ !all(is.na(.)))
 
     # for backend debugging
+    print("--------------------")
+    print("worldvars")
     print(res)
 
     return(res)
@@ -92,10 +97,56 @@ maindata <- reactive({
         stringsAsFactors = TRUE
     )
     colnames(maindata_data) <- maindata_header
-    res <- maindata_data %>% select_if(~ !all(is.na(.)))
+    # when read csv, may occur some all NA column
+    maindata <- maindata_data %>%
+        select_if(~ !all(is.na(.)))
+    # keep double/int their own way
+    # string to factors using stringAsFactors
+    # would not be complex or raw
+    # need convert "logical" to "factor" type
+    res <- list()
+    res$data <- maindata %>%
+        lapply(function(col) {
+            if (is.logical(col)) {
+                as.factor(col)
+            } else {
+                col
+            }
+        }) %>%
+        data.frame()
+    colnames(res$data) <- colnames(maindata)
+
+    # different
 
     # for backend debugging
-    print(head(res))
+    print("--------------------")
+    print("head(maindata)")
+    print(head(res$data))
+    print("typeof(maindata)")
+    print(head(res$data) %>% sapply(typeof))
+
+    #colnum for init_vars and msr_metric
+    res$colnum <- list()
+    res$colstr <- list()
+
+    stepcolnum <- which(names(res$data) == "[step]")
+
+    res$colnum$run_step <- c(1, stepcolnum)
+    res$colstr$run_step <- colnames(res$data)[res$colnum$run_step]
+
+    if (stepcolnum != 2) {
+        res$colnum$init_vars <- c(2 : (stepcolnum - 1))
+        res$colstr$init_vars <- colnames(res$data)[res$colnum$init_vars]
+    }
+
+    if (stepcolnum != length(res$data)) {
+        res$colnum$msr_metrics <- c((stepcolnum + 1):length(res$data))
+        res$colstr$msr_metrics <- colnames(res$data)[res$colnum$msr_metrics]
+    }
+    print("colnums")
+    print(res$colnum)
+    print("colstr")
+    print(res$colstr)
 
     return(res)
 })
