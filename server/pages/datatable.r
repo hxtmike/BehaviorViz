@@ -61,27 +61,31 @@ output$maindata_panel <- renderUI({
         title = "Choose Variables",
         width = 12,
         collapsible = TRUE,
-        awesomeCheckboxGroup(
+        prettyCheckboxGroup(
             inputId = "dt_sel_run",
             label = "[run number]",
+            shape = "curve",
             choices = maindata()$colstr$run,
             selected = maindata()$colstr$run
         ),
-        awesomeCheckboxGroup(
+        prettyCheckboxGroup(
             inputId = "dt_sel_init_vars",
             label = "Initial Values of the Variables",
+            shape = "curve",
             choices = maindata()$colstr$init_vars,
             selected = maindata()$colstr$init_vars
         ),
-        awesomeCheckboxGroup(
+        prettyCheckboxGroup(
             inputId = "dt_sel_step",
             label = "[step]",
+            shape = "curve",
             choices = maindata()$colstr$step,
             selected = maindata()$colstr$step
         ),
-        awesomeCheckboxGroup(
+        prettyCheckboxGroup(
             inputId = "dt_sel_msr_metrics",
             label = "Measurement Metric Data",
+            shape = "curve",
             choices = maindata()$colstr$msr_metrics,
             selected = maindata()$colstr$msr_metrics
         )

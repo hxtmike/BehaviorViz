@@ -25,3 +25,31 @@
 #maindata_dt .box {
   background-color: #ABB2B9;
 }
+
+/* for control panel of datatable */
+#maindata_panel .box .pretty {
+	display:block;
+}
+
+.pretty label span {
+	display:block;
+	/* white-space:nowrap; */
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+
+#dt_sel_run .pretty.p-default input:checked~.state label:after {
+  background-color: #00FFFF!important;
+}
+
+#dt_sel_init_vars .pretty.p-default input:checked~.state label:after {
+  background-color: #00FF00!important;
+}
+
+#dt_sel_step .pretty.p-default input:checked~.state label:after {
+  background-color: #00FFFF!important;
+}
+
+#dt_sel_msr_metrics .pretty.p-default input:checked~.state label:after {
+  background-color: #FF00FF!important;
+}
