@@ -12,5 +12,5 @@ server <- function(input, output) {
     # server code for pages
     source("./server/pages/datatable.r", local = TRUE)
     source("./server/pages/timeseries.r", local = TRUE)
-    source("./server/pages/multivariable.r", local = TRUE)
+    source("./server/pages/endingresults.r", local = TRUE)
 }

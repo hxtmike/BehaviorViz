@@ -144,6 +144,18 @@ maindata <- reactive({
         res$colnum$msr_metrics <- c((stepcolnum + 1):length(res$data))
         res$colstr$msr_metrics <- colnames(res$data)[res$colnum$msr_metrics]
     }
+
+    # factors and numeric
+    res$colnum$fac <- res$data %>%
+        sapply(is.factor) %>%
+        which()
+    res$colstr$fac <- colnames(res$data)[res$colnum$fac]
+
+    res$colnum$num <- res$data %>%
+        sapply(function(x) !is.factor(x)) %>%
+        which()
+    res$colstr$num <- colnames(res$data)[res$colnum$num]
+
     print("colnums")
     print(res$colnum)
     print("colstr")

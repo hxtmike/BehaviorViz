@@ -21,8 +21,8 @@ dashboardSidebar(
                 icon = icon("timeline")
             ),
             menuSubItem(
-                "Multivariable",
-                tabName = "multivariable",
+                "Ending Results",
+                tabName = "endingresults",
                 icon = icon("puzzle-piece")
             )
         ),
