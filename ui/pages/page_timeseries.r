@@ -19,12 +19,17 @@ tabItem(
     fluidRow(
         # control panel
         column(
-            width = 3,
-            uiOutput("ts_control")
+            width = 2,
+            uiOutput("ts_control1")
         ),
         column(
-            width = 9,
-            # uiOutput("ts_mainplot")
+            width = 2,
+            uiOutput("ts_control21"),
+            uiOutput("ts_control22")
+        ),
+        column(
+            width = 8,
+            uiOutput("ts_mainplot")
         )
     )
 )

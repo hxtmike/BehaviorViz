@@ -1,3 +1,10 @@
+library(shiny)
+library(shinyWidgets)
+library(shinydashboard)
+library(shinydashboardPlus)
+library(DT)
+library(tidyverse)
+
 ui_header <- dashboardHeader(
     title = tagList(
         span(class = "logo-lg", "BehaviorViz"),

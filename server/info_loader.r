@@ -146,10 +146,10 @@ maindata <- reactive({
     }
 
     # factors and numeric
-    res$colnum$fac <- res$data %>%
+    res$colnum$fct <- res$data %>%
         sapply(is.factor) %>%
         which()
-    res$colstr$fac <- colnames(res$data)[res$colnum$fac]
+    res$colstr$fct <- colnames(res$data)[res$colnum$fct]
 
     res$colnum$num <- res$data %>%
         sapply(function(x) !is.factor(x)) %>%

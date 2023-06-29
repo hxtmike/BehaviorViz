@@ -1,12 +1,4 @@
-library(shiny)
-library(shinyWidgets)
-library(shinydashboard)
-library(shinydashboardPlus)
-library(DT)
-library(tidyverse)
-
-
-source("./ui/ui.r", local = TRUE)
-source("./server/server.r", local = TRUE)
+source("ui.r", local = TRUE)
+source("server.r", local = TRUE)
 
 shinyApp(ui = ui, server = server)

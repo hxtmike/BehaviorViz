@@ -1,7 +1,5 @@
-library(shiny)
-library(stringr)
-library(dplyr)
-
+library(colourpicker)
+library(shinyalert)
 
 
 server <- function(input, output) {

@@ -35,6 +35,10 @@ dashboardSidebar(
             "Source Code",
             icon = icon("github"),
             href = "https://github.com/hxtmike/BehaviorViz"
+        ),
+        menuItem(
+            "Donation (if you like this)",
+            icon = icon("heart"),
+            href = "https://github.com/sponsors/hxtmike/"
         )
-    )
 )
