@@ -8,7 +8,7 @@ This web application contains multiple visualisation strategies with a user-frie
 
 ### Online Showcase
 
-[Here](https://hxtmike.shinyapps.io/behaviorviz/) is an online showcase. It may not work due to the time limitation of [shinyapps.io by Posit](https://www.shinyapps.io/) As a result, the online showcase is not suitable for everyday use.
+[Here](https://hxtmike.shinyapps.io/behaviorviz/) is an online showcase. It may not work due to the time limitation of [shinyapps.io by Posit](https://www.shinyapps.io/). As a result, the online showcase is not suitable for everyday use.
 
 ### Local Deployment
 
@@ -28,13 +28,15 @@ After downloading the full repository and installing `R 4.3+` and all packages l
     Rscript ./shiny.r
     ```
 
-## Contributions
-
-If you'd like to contribute to the development of this script, feel free to fork the repository and submit a pull request. I'll be happy to review your changes and merge them into the main codebase.
-
 ## Donation
 
-Welcome to support me if you like [BehaviorViz](https://github.com/hxtmike/BehaviorViz) or help me to cover the expense of the online version of [BehaviorViz](https://hxtmike.shinyapps.io/behaviorviz/)
+Welcome to support me if you like `BehaviorViz` or help me to cover the expense of the [online version](https://hxtmike.shinyapps.io/behaviorviz/).
+
+The donation page is [here](https://github.com/sponsors/hxtmike/)
+
+## Contributions
+
+If you'd like to contribute to the development, feel free to fork the repository and submit a pull request. I'll be happy to review your changes and merge them into the main codebase.
 
 ## License
 

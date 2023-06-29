@@ -41,4 +41,5 @@ dashboardSidebar(
             icon = icon("heart"),
             href = "https://github.com/sponsors/hxtmike/"
         )
+    )
 )
