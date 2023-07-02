@@ -206,6 +206,13 @@ ts_basic_graph <- reactive({
                 )
             )
     }
+    graph <- graph %>% dyHighlight(
+        highlightCircleSize = 5,
+        highlightSeriesBackgroundAlpha = 1
+    ) %>%
+    dyLegend(show = "follow") %>%
+    dyRangeSelector()
+
     return(graph)
 })
 
