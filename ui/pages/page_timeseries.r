@@ -24,8 +24,8 @@ tabItem(
         ),
         column(
             width = 2,
-            uiOutput("ts_control21"),
-            uiOutput("ts_control22")
+            uiOutput("ts_control2"),
+            # uiOutput("ts_control22")
         ),
         column(
             width = 8,

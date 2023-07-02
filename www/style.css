@@ -1,6 +1,10 @@
 
 /* metadata valuebox */
 /* for value of valuebox */
+#metadata h4 {
+  color: #bec5cb!important;
+}
+
 #metadata h3 {
   font-size: 15px;
   white-space: normal;
@@ -27,29 +31,37 @@
 }
 
 /* for control panel of datatable */
-#maindata_panel .box .pretty {
-	display:block;
-}
 
-.pretty label span {
-	display:block;
-	/* white-space:nowrap; */
-	overflow:hidden;
-	text-overflow:ellipsis;
-}
-
-#dt_sel_run .pretty.p-default input:checked~.state label:after {
+#dt_sel_run .checkbox-primary input[type="checkbox"]:checked+label::before,
+#dt_sel_run .checkbox-primary input[type="radio"]:checked+label::before {
   background-color: #00FFFF!important;
+  border-color: #00FFFF!important;
 }
 
-#dt_sel_init_vars .pretty.p-default input:checked~.state label:after {
+#dt_sel_init_vars .checkbox-primary input[type="checkbox"]:checked+label::before,
+#dt_sel_init_vars .checkbox-primary input[type="radio"]:checked+label::before {
   background-color: #00FF00!important;
+  border-color: #00FF00!important;
 }
 
-#dt_sel_step .pretty.p-default input:checked~.state label:after {
+#dt_sel_step .checkbox-primary input[type="checkbox"]:checked+label::before,
+#dt_sel_step .checkbox-primary input[type="radio"]:checked+label::before {
   background-color: #00FFFF!important;
+  border-color: #00FFFF!important;
 }
 
-#dt_sel_msr_metrics .pretty.p-default input:checked~.state label:after {
+#dt_sel_msr_metrics .checkbox-primary input[type="checkbox"]:checked+label::before,
+#dt_sel_msr_metrics .checkbox-primary input[type="radio"]:checked+label::before {
   background-color: #FF00FF!important;
+  border-color: #FF00FF!important;
+}
+
+/* style for timeseries page */
+
+.awesome-radio {
+  padding-left: 18px!important;
+}
+
+#ts_mainplot .box {
+  background-color: #ABB2B9;
 }

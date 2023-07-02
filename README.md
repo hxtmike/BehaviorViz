@@ -1,8 +1,8 @@
 # BehaviorViz
 
-Visualisation Tool for BehaviorSpace in NetLogo
+BehaviorViz is a dashboard tool that allows a user to upload any BehaviorSpace file in the standard format (Table output) and explore the relationships between simulation inputs and output measures. BehaviorSpace is a software tool integrated with NetLogo that allows you to perform experiments with agent-based models.
 
-This web application contains multiple visualisation strategies with a user-friendly web-based interface.
+For more information about the output files of BehaviorSpace, please visit the [BehaviorSpace Guide](https://ccl.northwestern.edu/netlogo/docs/behaviorspace.html) or [NetLogo Manual](https://ccl.northwestern.edu/netlogo/docs/)
 
 ## Usage
 

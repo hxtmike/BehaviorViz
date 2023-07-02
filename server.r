@@ -1,5 +1,6 @@
 library(colourpicker)
 library(shinyalert)
+library(dygraphs)
 
 
 server <- function(input, output) {

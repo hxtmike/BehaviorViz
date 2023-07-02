@@ -58,32 +58,29 @@ output$maindata_panel <- renderUI({
     box(
         title = "Choose Variables",
         width = 12,
+        status = "primary",
         collapsible = TRUE,
-        prettyCheckboxGroup(
+        awesomeCheckboxGroup(
             inputId = "dt_sel_run",
             label = "[run number]",
-            shape = "curve",
             choices = maindata()$colstr$run,
             selected = maindata()$colstr$run
         ),
-        prettyCheckboxGroup(
+        awesomeCheckboxGroup(
             inputId = "dt_sel_init_vars",
             label = "Initial Values of the Variables",
-            shape = "curve",
             choices = maindata()$colstr$init_vars,
             selected = maindata()$colstr$init_vars
         ),
-        prettyCheckboxGroup(
+        awesomeCheckboxGroup(
             inputId = "dt_sel_step",
             label = "[step]",
-            shape = "curve",
             choices = maindata()$colstr$step,
             selected = maindata()$colstr$step
         ),
-        prettyCheckboxGroup(
+        awesomeCheckboxGroup(
             inputId = "dt_sel_msr_metrics",
             label = "Measurement Metric Data",
-            shape = "curve",
             choices = maindata()$colstr$msr_metrics,
             selected = maindata()$colstr$msr_metrics
         )
@@ -101,8 +98,9 @@ output$maindata_dt <- renderUI({
         input$dt_sel_msr_metrics)
 
     box(
-        title = "Main Data of the Output File",
         width = 12,
+        title = "Main Data of the Output File",
+        status = "primary",
         datatable(
             maindata()$data %>%
             select(all_of(selected_col)),
