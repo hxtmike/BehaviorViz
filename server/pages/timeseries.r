@@ -101,7 +101,7 @@ output$ts_viztype_radio <- renderUI({
     radioGroupButtons(
         inputId = "ts_viztype_choice",
         label = "Choose the visualisation type", # nolint: object_name_linter.
-        choices = c("Basic", "Heatmap", "Animation"), # nolint: object_name_linter, line_length_linter.
+        choices = c("Basic", "##Potential Placeholder##"), # nolint: object_name_linter, line_length_linter.
         status = "primary",
         justified = TRUE,
         individual = TRUE

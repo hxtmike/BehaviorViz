@@ -27,11 +27,6 @@ dashboardSidebar(
             )
         ),
         menuItem(
-            "Setting",
-            tabName = "setting",
-            icon = icon("gear")
-        ),
-        menuItem(
             "Source Code",
             icon = icon("github"),
             href = "https://github.com/hxtmike/BehaviorViz"
