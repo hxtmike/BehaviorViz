@@ -22,6 +22,7 @@ ui_footer <- dashboardFooter(
 )
 
 ui <- dashboardPage(
+    title = "BehaviorViz",
     skin = "midnight",
     header = ui_header,
     sidebar = ui_siderbar,
