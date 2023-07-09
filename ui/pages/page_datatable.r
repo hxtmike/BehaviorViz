@@ -6,23 +6,23 @@ tabItem(
     fluidRow(
         column(
             width = 9,
-            uiOutput("metadata")
+            uiOutput("dt_metadata")
         ),
         column(
             width = 3,
-            uiOutput("worldvars"),
+            uiOutput("dt_worldvars"),
         )
     ),
     fluidRow(
         # panel 1
         column(
             width = 2,
-            uiOutput("maindata_panel")
+            uiOutput("dt_maindata_panel")
         ),
         # datatable col
         column(
             width = 10,
-            uiOutput("maindata_dt")
+            uiOutput("dt_maindata_datatable")
         ),
     )
 )

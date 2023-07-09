@@ -1,32 +1,86 @@
+/* style for all cols */
+.col-lg-1,
+.col-lg-10,
+.col-lg-11,
+.col-lg-12,
+.col-lg-2,
+.col-lg-3,
+.col-lg-4,
+.col-lg-5,
+.col-lg-6,
+.col-lg-7,
+.col-lg-8,
+.col-lg-9,
+.col-md-1,
+.col-md-10,
+.col-md-11,
+.col-md-12,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-sm-1,
+.col-sm-10,
+.col-sm-11,
+.col-sm-12,
+.col-sm-2,
+.col-sm-3,
+.col-sm-4,
+.col-sm-5,
+.col-sm-6,
+.col-sm-7,
+.col-sm-8,
+.col-sm-9,
+.col-xs-1,
+.col-xs-10,
+.col-xs-11,
+.col-xs-12,
+.col-xs-2,
+.col-xs-3,
+.col-xs-4,
+.col-xs-5,
+.col-xs-6,
+.col-xs-7,
+.col-xs-8,
+.col-xs-9 {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+/* style for datatable page */
 
 /* metadata valuebox */
 /* for value of valuebox */
-#metadata h4 {
-  color: #bec5cb!important;
+#dt_metadata h4 {
+  color: #bec5cb !important;
 }
 
-#metadata h3 {
+#dt_metadata h3 {
   font-size: 15px;
   white-space: normal;
 }
 
 /* for subtitle of valuebox */
-#metadata p {
+#dt_metadata p {
   font-size: 10px;
 }
 
 /* for subtitle of valuebox */
-#metadata i {
+#dt_metadata i {
   font-size: 30px;
 }
 
 /* for worldvar_title */
-#worldvar_title h4 {
+#dt_worldvars h4 {
   color: #bec5cb;
 }
 
 /* for datatable theme */
-#maindata_dt .box {
+#dt_maindata_datatable .box {
   background-color: #ABB2B9;
 }
 
@@ -34,34 +88,61 @@
 
 #dt_sel_run .checkbox-primary input[type="checkbox"]:checked+label::before,
 #dt_sel_run .checkbox-primary input[type="radio"]:checked+label::before {
-  background-color: #00FFFF!important;
-  border-color: #00FFFF!important;
+  background-color: #00FFFF !important;
+  border-color: #00FFFF !important;
 }
 
 #dt_sel_init_vars .checkbox-primary input[type="checkbox"]:checked+label::before,
 #dt_sel_init_vars .checkbox-primary input[type="radio"]:checked+label::before {
-  background-color: #00FF00!important;
-  border-color: #00FF00!important;
+  background-color: #00FF00 !important;
+  border-color: #00FF00 !important;
 }
 
 #dt_sel_step .checkbox-primary input[type="checkbox"]:checked+label::before,
 #dt_sel_step .checkbox-primary input[type="radio"]:checked+label::before {
-  background-color: #00FFFF!important;
-  border-color: #00FFFF!important;
+  background-color: #00FFFF !important;
+  border-color: #00FFFF !important;
 }
 
 #dt_sel_msr_metrics .checkbox-primary input[type="checkbox"]:checked+label::before,
 #dt_sel_msr_metrics .checkbox-primary input[type="radio"]:checked+label::before {
-  background-color: #FF00FF!important;
-  border-color: #FF00FF!important;
+  background-color: #FF00FF !important;
+  border-color: #FF00FF !important;
 }
 
 /* style for timeseries page */
 
 .awesome-radio {
-  padding-left: 18px!important;
+  padding-left: 18px !important;
 }
 
 #ts_mainplot .box {
   background-color: #ABB2B9;
 }
+
+/* style for ending results page */
+
+#er_rows_selector .box {
+  background-color: #ABB2B9;
+}
+
+#er_rows_selector {
+  font-size: 0.7em
+}
+
+#er_rows_selector .box-body,
+#er_rows_selector .box-body td,
+#er_rows_selector .box-body th {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+/* #er_mainplot_box .box-body {
+  aspect-ratio: 1;
+} */
+
+#er_mainplot h3 {
+  text-align: center;
+}
+
+

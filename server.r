@@ -1,6 +1,9 @@
+library(GGally)
+library(plotly)
 library(colourpicker)
 library(shinyalert)
 library(dygraphs)
+library(janitor)
 
 
 server <- function(input, output) {

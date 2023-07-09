@@ -1,6 +1,7 @@
 dashboardBody(
     tags$head(
-        includeCSS("www/style.css")
+        includeCSS("www/style.css"),
+        includeScript("www/script.js")
     ),
     tabItems(
         source("./ui/pages/page_upload.r")$value,

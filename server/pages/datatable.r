@@ -4,7 +4,7 @@ output$file_state_page_datatable <- renderUI({
 # server code on data table page
 
 ## output for metadata
-output$metadata <- renderUI({
+output$dt_metadata <- renderUI({
     if (file_state() != "right_file") {
         return()
     }
@@ -40,7 +40,7 @@ output$metadata <- renderUI({
 })
 
 
-output$worldvars <- renderUI({
+output$dt_worldvars <- renderUI({
     if (file_state() != "right_file") {
         return()
     }
@@ -51,7 +51,7 @@ output$worldvars <- renderUI({
 })
 
 
-output$maindata_panel <- renderUI({
+output$dt_maindata_panel <- renderUI({
     if (file_state() != "right_file") {
         return()
     }
@@ -87,7 +87,7 @@ output$maindata_panel <- renderUI({
     )
 })
 
-output$maindata_dt <- renderUI({
+output$dt_maindata_datatable <- renderUI({
     if (file_state() != "right_file") {
         return()
     }
@@ -106,6 +106,7 @@ output$maindata_dt <- renderUI({
             select(all_of(selected_col)),
             filter = "top",
             rownames = FALSE,
+            selection = 'none'
         ) %>%
             formatStyle(
                 input$dt_sel_run,

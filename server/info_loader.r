@@ -67,6 +67,7 @@ worldvars <- reactive({
     )
     colnames(worldvars_data) <- worldvars_header
     # when read csv, may occur some all NA column
+    worldvars_data <- worldvars_data %>% clean_names() # rename duplicates names
     res <- worldvars_data %>% select_if(~ !all(is.na(.)))
 
     # for backend debugging

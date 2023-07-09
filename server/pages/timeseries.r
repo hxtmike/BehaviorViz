@@ -126,7 +126,7 @@ output$ts_typenote <- renderUI({
     }
 })
 
-# control panels 1
+# control panel 1
 output$ts_control1 <- renderUI({
     if (ts_default_state_type()) {
         return()
@@ -183,15 +183,19 @@ ts_basic_graph <- reactive({
     if (length(ts_basic_existing()$var_name) == 0) {
         return()
     }
+
     # renew the graph
     graph <- ts_maindata()$data[
+        # find the selected column in prepared data
         c("[step]", ts_basic_existing()$var_name)
     ] %>%
+        # fliter rows to delete all row are NAs (some column not selected may have many rows) # nolint: line_length_linter.
         filter(
             if_any(2:(1 + length(ts_basic_existing()$var_name)), ~ !is.na(.)) # nolint: line_length_linter.
         ) %>%
         dygraph()
 
+    # decorate each line
     for (i in seq_along(ts_basic_existing()$var_name)) {
         graph <- graph %>%
             dySeries(ts_basic_existing()$var_name[i],
@@ -206,6 +210,8 @@ ts_basic_graph <- reactive({
                 )
             )
     }
+
+    # style the whole graph
     graph <- graph %>% dyHighlight(
         highlightCircleSize = 5,
         highlightSeriesBackgroundAlpha = 1
@@ -401,6 +407,8 @@ output$ts_mainplot <- renderUI({
         res <- box(
             width = 12,
             title = "Time Series Visualisation",
+            status = "primary",
+            solidHeader = TRUE,
             ts_basic_graph()
         )
         return(res)
