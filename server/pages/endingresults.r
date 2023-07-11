@@ -306,7 +306,7 @@ er_control_from_viztype <- reactive({
         res$note <- list(
             tags$ul(
                 tags$li("This is one of the most commenly used visualisation for relationship between two continous variables"),
-                tags$li("A discrete variable can be chosen to group the data and different groups can be illustrated on different colours"), # nolint: line_length_linter.
+                tags$li("A variable can be chosen for colours of the plot"), # nolint: line_length_linter.
                 tags$li("A continuous variable can be projected to sizes of points") # nolint: line_length_linter.
             )
         )
@@ -336,6 +336,40 @@ er_control_from_viztype <- reactive({
                 inputId = "er_scatter_size",
                 label = "Choose an continous variable for size",
                 choices = c(er_cols_selected()$num_vars, "None"),
+                selected = "None",
+                options = list(size = 5)
+            )
+        )
+        return(res)
+    }
+
+    if (input$er_viztype_selected == "2D Density Plot") {
+        res$note <- list(
+            tags$ul(
+                tags$li("This is widely used to study the relationship between two continuous variables"),
+                tags$li("It could be especially useful when data volume is large"),
+                tags$li("A discrete variable can be chosen to group the data and different groups can be illustrated on different colours"), # nolint: line_length_linter.
+            )
+        )
+        res$controller <- list(
+            pickerInput(
+                inputId = "er_2ddensity_xaxis",
+                label = "Choose an continuous variable x-axis",
+                choices = er_cols_selected()$num_vars,
+                selected = er_cols_selected()$num_vars[1],
+                options = list(size = 5)
+            ),
+            pickerInput(
+                inputId = "er_2ddensity_yaxis",
+                label = "Choose an continuous variable y-axis",
+                choices = er_cols_selected()$num_vars,
+                selected = er_cols_selected()$num_vars[2],
+                options = list(size = 5)
+            ),
+            pickerInput(
+                inputId = "er_2ddensity_colour",
+                label = "Choose an discrete variable for colour",
+                choices = c(er_cols_selected()$fct_vars, "None"),
                 selected = "None",
                 options = list(size = 5)
             )
@@ -575,6 +609,30 @@ er_graph <- eventReactive(input$er_plot_confirm, {
                     )
                 ) + geom_point()
             # graph <- graph %>% ggMarginal(type = "density")
+            return(graph)
+        }
+    }
+
+    if (input$er_viztype_selected == "2D Density Plot") {
+
+        if (input$er_2ddensity_colour == "None") {
+            graph <- er_maindata_rows_selected() %>%
+                ggally_density(aes(
+                    x = .data[[input$er_2ddensity_xaxis]],
+                    y = .data[[input$er_2ddensity_yaxis]],
+                    alpha = .5
+                ))
+            return(graph)
+        }
+
+        if (input$er_2ddensity_colour != "None") {
+            graph <- er_maindata_rows_selected() %>%
+                ggally_density(aes(
+                    x = .data[[input$er_2ddensity_xaxis]],
+                    y = .data[[input$er_2ddensity_yaxis]],
+                    color = .data[[input$er_2ddensity_colour]],
+                    alpha = .5
+                ))
             return(graph)
         }
     }
