@@ -15,13 +15,23 @@ fc_null_if_none <- function(value) {
 }
 
 fc_ggplotly_if_gg_else_value <- function(value, width, height) { # nolint: object_usage_linter.
-    if (class(value)[1] != "shiny.tag") {
-        value %>%
+    if (class(value)[1] == "gg") {
+        res <- value %>%
             ggplotly( # nolint: object_usage_linter.
                 width = width,
                 height = height
             )
-    } else {
-        value
+        return(res)
     }
+
+    if (class(value)[1] == "plotly") {
+        res <- value %>%
+            layout(
+                width = width,
+                height = height
+            )
+        return(res)
+    }
+
+    return(value)
 }

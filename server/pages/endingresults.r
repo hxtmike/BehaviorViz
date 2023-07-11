@@ -226,7 +226,7 @@ er_control_from_viztype <- reactive({
     if (input$er_viztype_selected == "Pairwise EDA") {
         res$note <- list(
             tags$ul(
-                tags$li("This visualisation may be VERY TIME COMSUMING"),
+                tags$li("This visualisation may be VERY TIME CONSUMING"),
                 tags$li("Pairwise EDA explore the relationship between each pair of variables"),
                 tags$li("An discrete variable can be chosen to group the data in different colours. Normally, this should be the predicted variable")
             )
@@ -234,7 +234,7 @@ er_control_from_viztype <- reactive({
         res$controller <- list(
             pickerInput(
                 inputId = "er_eda_colour_var",
-                label = "Choose an discrete variable for different colours",
+                label = "Colour",
                 choices = c(er_cols_selected()$fct_vars, "None"),
                 selected = "None",
                 options = list(size = 5)
@@ -274,26 +274,26 @@ er_control_from_viztype <- reactive({
         res$note <- list(
             tags$ul(
                 tags$li("This visualisation shows the density distribution of the target continuous variable"),
-                tags$li("A discrete variable or variables can be chosen to group the data and different groups can be illustrated on the dimensions of the y-axis or colours ") # nolint: line_length_linter.
+                tags$li("A discrete variable or variables can be chosen to group the data and different groups can be illustrated on the dimensions of the y-axis and/or colours ") # nolint: line_length_linter.
             )
         )
         res$controller <- list(
             awesomeRadio(
                 inputId = "er_histdens_type",
-                label = "Choose visualisation type",
+                label = "Type",
                 choices = c("Histogram", "Density Plot"),
                 inline = TRUE
             ),
             pickerInput(
                 inputId = "er_histdens_yaxis",
-                label = "Choose an discrete variable for y-axis",
+                label = "Y-axis",
                 choices = c(er_cols_selected()$fct_vars, "None"),
                 selected = "None",
                 options = list(size = 5)
             ),
             pickerInput(
                 inputId = "er_histdens_colour",
-                label = "Choose an discrete variable for different the colour",
+                label = "Colour",
                 choices = c(er_cols_selected()$fct_vars, "None"),
                 selected = "None",
                 options = list(size = 5)
@@ -313,28 +313,28 @@ er_control_from_viztype <- reactive({
         res$controller <- list(
             pickerInput(
                 inputId = "er_scatter_xaxis",
-                label = "Choose an continuous variable x-axis",
+                label = "X-axis",
                 choices = er_cols_selected()$num_vars,
                 selected = er_cols_selected()$num_vars[1],
                 options = list(size = 5)
             ),
             pickerInput(
                 inputId = "er_scatter_yaxis",
-                label = "Choose an continuous variable y-axis",
+                label = "Y-axis",
                 choices = er_cols_selected()$num_vars,
                 selected = er_cols_selected()$num_vars[2],
                 options = list(size = 5)
             ),
             pickerInput(
                 inputId = "er_scatter_colour",
-                label = "Choose an variable for colour",
+                label = "Colour",
                 choices = c(er_cols_selected()$all_vars, "None"),
                 selected = "None",
                 options = list(size = 5)
             ),
             pickerInput(
                 inputId = "er_scatter_size",
-                label = "Choose an continous variable for size",
+                label = "Size",
                 choices = c(er_cols_selected()$num_vars, "None"),
                 selected = "None",
                 options = list(size = 5)
@@ -346,7 +346,7 @@ er_control_from_viztype <- reactive({
     if (input$er_viztype_selected == "2D Density Plot") {
         res$note <- list(
             tags$ul(
-                tags$li("This is widely used to study the relationship between two continuous variables"),
+                tags$li("This visualisation is widely used to study the relationship between two continuous variables"),
                 tags$li("It could be especially useful when data volume is large"),
                 tags$li("A discrete variable can be chosen to group the data and different groups can be illustrated on different colours"), # nolint: line_length_linter.
             )
@@ -354,21 +354,101 @@ er_control_from_viztype <- reactive({
         res$controller <- list(
             pickerInput(
                 inputId = "er_2ddensity_xaxis",
-                label = "Choose an continuous variable x-axis",
+                label = "X-axis",
                 choices = er_cols_selected()$num_vars,
                 selected = er_cols_selected()$num_vars[1],
                 options = list(size = 5)
             ),
             pickerInput(
                 inputId = "er_2ddensity_yaxis",
-                label = "Choose an continuous variable y-axis",
+                label = "Y-axis",
                 choices = er_cols_selected()$num_vars,
                 selected = er_cols_selected()$num_vars[2],
                 options = list(size = 5)
             ),
             pickerInput(
                 inputId = "er_2ddensity_colour",
-                label = "Choose an discrete variable for colour",
+                label = "Colour",
+                choices = c(er_cols_selected()$fct_vars, "None"),
+                selected = "None",
+                options = list(size = 5)
+            )
+        )
+        return(res)
+    }
+
+    if (input$er_viztype_selected == "3D Scatter Plot") {
+        res$note <- list(
+            tags$ul(
+                tags$li("This is a quite fancy form of visualisation. However, it may not a good idea to visualise too much infomation in a single plot, as it may be challenging to interpret"), # nolint: line_length_linter.
+                tags$li("This visualisation may be quite time consuming"),
+            )
+        )
+        res$controller <- list(
+            pickerInput(
+                inputId = "er_3d_xaxis",
+                label = "X-axis",
+                choices = er_cols_selected()$num_vars,
+                selected = er_cols_selected()$num_vars[1],
+                options = list(size = 5)
+            ),
+            pickerInput(
+                inputId = "er_3d_yaxis",
+                label = "Y-axis",
+                choices = er_cols_selected()$num_vars,
+                selected = er_cols_selected()$num_vars[2],
+                options = list(size = 5)
+            ),
+            pickerInput(
+                inputId = "er_3d_zaxis",
+                label = "Z-axis",
+                choices = er_cols_selected()$num_vars,
+                selected = er_cols_selected()$num_vars[3],
+                options = list(size = 5)
+            ),
+            pickerInput(
+                inputId = "er_3d_colour",
+                label = "Colour",
+                choices = c(er_cols_selected()$all_vars, "None"),
+                selected = "None",
+                options = list(size = 5)
+            ),
+            pickerInput(
+                inputId = "er_3d_size",
+                label = "Size",
+                choices = c(er_cols_selected()$num_vars, "None"),
+                selected = "None",
+                options = list(size = 5)
+            )
+        )
+        return(res)
+    }
+
+    if (input$er_viztype_selected == "Barplot") {
+        res$note <- list(
+            tags$ul(
+                tags$li("This visualiation is used for study the relationship between one or more discrete variables"), # nolint: line_length_linter.
+                tags$li("A discrete variable or variables can be chosen to group the data and different groups can be illustrated on the dimensions of the y-axis and/or colours ") # nolint: line_length_linter.
+            )
+        )
+        res$controller <- list(
+            pickerInput(
+                inputId = "er_barplot_xaxis",
+                label = "X-axis",
+                choices = er_cols_selected()$fct_vars,
+                selected = er_cols_selected()$fct_vars[1],
+                options = list(size = 5)
+            ),
+            pickerInput(
+                inputId = "er_barplot_yaxis",
+                label = "Y-axis",
+                choices = c(er_cols_selected()$fct_vars, "None"),
+                selected = "None",
+                options = list(size = 5)
+            ),
+            pickerInput(
+                inputId = "er_barplot_colour",
+                label = "Colour",
                 choices = c(er_cols_selected()$fct_vars, "None"),
                 selected = "None",
                 options = list(size = 5)
@@ -431,13 +511,13 @@ output$er_control2 <- renderUI({
             p("Responsive Change"),
             numericInput(
                 inputId = "er_mainplot_width",
-                label = "Set Width (in pixels, 0 means default value)",
+                label = "Width (in pixels, 0 means default value)",
                 value = 0,
                 min = 0
             ),
             numericInput(
                 inputId = "er_mainplot_height",
-                label = "Set Height (in pixels, 0 means default value)",
+                label = "Height (in pixels, 0 means default value)",
                 value = 0,
                 min = 0
             )
@@ -636,6 +716,117 @@ er_graph <- eventReactive(input$er_plot_confirm, {
             return(graph)
         }
     }
+
+    if (input$er_viztype_selected == "3D Scatter Plot") {
+
+        if (input$er_3d_colour == "None" &&
+            input$er_3d_size == "None") {
+            graph <- er_maindata_rows_selected() %>%
+                plot_ly(
+                    x = ~.data[[input$er_3d_xaxis]],
+                    y = ~.data[[input$er_3d_yaxis]],
+                    z = ~.data[[input$er_3d_zaxis]],
+                    # color = ~.data[[]],
+                    # size = ~.data[[]],
+                    type = "scatter3d",
+                    mode = "markers"
+                )
+            return(graph)
+        }
+
+        if (input$er_3d_colour != "None" &&
+            input$er_3d_size == "None") {
+            graph <- er_maindata_rows_selected() %>%
+                plot_ly(
+                    x = ~.data[[input$er_3d_xaxis]],
+                    y = ~.data[[input$er_3d_yaxis]],
+                    z = ~.data[[input$er_3d_zaxis]],
+                    color = ~.data[[input$er_3d_colour]],
+                    # size = ~.data[[]],
+                    type = "scatter3d",
+                    mode = "markers"
+                )
+            return(graph)
+        }
+
+        if (input$er_3d_colour == "None" &&
+            input$er_3d_size != "None") {
+            graph <- er_maindata_rows_selected() %>%
+                plot_ly(
+                    x = ~.data[[input$er_3d_xaxis]],
+                    y = ~.data[[input$er_3d_yaxis]],
+                    z = ~.data[[input$er_3d_zaxis]],
+                    # color = ~.data[[input$er_3d_colour]],
+                    size = ~.data[[input$er_3d_size]],
+                    type = "scatter3d",
+                    mode = "markers"
+                )
+            return(graph)
+        }
+
+        if (input$er_3d_colour != "None" &&
+            input$er_3d_size != "None") {
+            graph <- er_maindata_rows_selected() %>%
+                plot_ly(
+                    x = ~.data[[input$er_3d_xaxis]],
+                    y = ~.data[[input$er_3d_yaxis]],
+                    z = ~.data[[input$er_3d_zaxis]],
+                    color = ~.data[[input$er_3d_colour]],
+                    size = ~.data[[input$er_3d_size]],
+                    type = "scatter3d",
+                    mode = "markers"
+                )
+            return(graph)
+        }
+    }
+
+    if (input$er_viztype_selected == "Barplot") {
+
+        if (input$er_barplot_yaxis == "None" &&
+            input$er_barplot_colour == "None") {
+            graph <- er_maindata_rows_selected() %>%
+                ggally_barDiag(aes(
+                    x = .data[[input$er_barplot_xaxis]]
+                    # y = .data[[input$er_barplot_yaxis]],
+                    # color = .data[[input$er_barplot_colour]]
+                ))
+            return(graph)
+        }
+
+        if (input$er_barplot_yaxis == "None" &&
+            input$er_barplot_colour != "None") {
+            graph <- er_maindata_rows_selected() %>%
+                ggally_barDiag(aes(
+                    x = .data[[input$er_barplot_xaxis]],
+                    # y = .data[[input$er_barplot_yaxis]],
+                    color = .data[[input$er_barplot_colour]]
+                ))
+            return(graph)
+        }
+
+        if (input$er_barplot_yaxis != "None" &&
+            input$er_barplot_colour == "None") {
+            graph <- er_maindata_rows_selected() %>%
+                ggally_facetbar(aes(
+                    x = .data[[input$er_barplot_xaxis]],
+                    y = .data[[input$er_barplot_yaxis]]
+                    # color = .data[[input$er_barplot_colour]]
+                ))
+            return(graph)
+        }
+
+        if (input$er_barplot_yaxis != "None" &&
+            input$er_barplot_colour != "None") {
+            graph <- er_maindata_rows_selected() %>%
+                ggally_facetbar(aes(
+                    x = .data[[input$er_barplot_xaxis]],
+                    y = .data[[input$er_barplot_yaxis]],
+                    color = .data[[input$er_barplot_colour]]
+                ))
+            return(graph)
+        }
+    }
+
 
     graph <- h3("UNDER CONSTRUCTION, TO BE CHANGED!!")
     return(graph)
