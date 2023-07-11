@@ -579,6 +579,11 @@ er_graph <- eventReactive(input$er_plot_confirm, {
         }
     }
 
+    graph <- h3("UNDER CONSTRUCTION, TO BE CHANGED!!")
+    return(graph)
+})
+
+
 output$er_mainplot <- renderUI({
     if (file_state() != "right_file") {
         return()
