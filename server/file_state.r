@@ -22,7 +22,7 @@ file_state <- reactive({
         header = FALSE
     )
 
-    identifier_nonrunnumber <- identifier_header[1, 1] != "[run number]" # nolint
+    identifier_nonrunnumber <- identifier_header[1, 1] != "[run number]"
 
     if (is.na(csv_file_header_info()$nl_ver) |
         is.na(csv_file_header_info()$nl_filename) |
@@ -58,7 +58,7 @@ file_state_ui <- reactive({
     res <- list()
     if (file_state() == "no_file") {
         res$h4 <- tags$h4(
-            "No file have been uploaded yet", # nolint: object_name_linter.
+            "No file have been uploaded yet",
         )
         res$page <- fluidRow(
             column(
@@ -76,7 +76,7 @@ file_state_ui <- reactive({
 
     if (file_state() == "wrong_csv") {
         res$h4 <- tags$h4(
-            "The CSV file cannot be parsed correctly. Please upload Table output with right format", # nolint: line_length_linter.
+            "The CSV file cannot be parsed correctly. Please upload Table output with right format",
             style = "color: red"
         )
         res$page <- fluidRow(
@@ -95,7 +95,7 @@ file_state_ui <- reactive({
 
     if (file_state() == "spreadsheet_output") {
         res$h4 <- tags$h4(
-            "The CSV file might be a Spreadsheet output of BehaviorSpace. Please upload Table output instead", # nolint: line_length_linter.
+            "The CSV file might be a Spreadsheet output of BehaviorSpace. Please upload Table output instead",
             style = "color: orange"
         )
         res$page <- fluidRow(
@@ -114,7 +114,7 @@ file_state_ui <- reactive({
 
     if (file_state() == "duplicated_colnames") {
         res$h4 <- tags$h4(
-            "The CSV file contains duplicate column names, please process them before uploading", # nolint: line_length_linter.
+            "The CSV file contains duplicate column names, please process them before uploading",
             style = "color: orange"
         )
         res$page <- fluidRow(
@@ -133,7 +133,7 @@ file_state_ui <- reactive({
 
     if (file_state() == "right_file") {
         res$h4 <- tags$h4(
-            "The file have been uploaded successfully", # nolint: line_length_linter.
+            "The file have been uploaded successfully",
             style = "color: green"
         )
     }

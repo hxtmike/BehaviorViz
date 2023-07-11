@@ -67,60 +67,57 @@ output$er_viztype_selector <- renderUI({
 
     # for interaction EDA
     if (er_cols_selected()$fct_cnt + er_cols_selected()$num_cnt >= 2) {
-
         potential_viztype_choice <- potential_viztype_choice %>%
             append("Pairwise EDA")
-
     }
+
+    # separate visualisation could be developed in latter version
 
     # for independent analysis for nums
-    if (er_cols_selected()$num_cnt >= 2 &&
-        er_cols_selected()$fct_cnt == 0) {
+    # if (er_cols_selected()$num_cnt >= 2 &&
+    #     er_cols_selected()$fct_cnt == 0) {
 
-        potential_viztype_choice <- potential_viztype_choice %>%
-            append("Histogram/Density Plot (Separate)") %>%
-            append("Box plot/Violin Plot (Separate)")
+    #     potential_viztype_choice <- potential_viztype_choice %>%
+    #         append("Histogram/Density Plot (Separate)") %>%
+    #         append("Box plot/Violin Plot (Separate)")
 
-    }
+    # }
 
     # for independent analysis for cats
-    if (er_cols_selected()$num_cnt == 0 &&
-        er_cols_selected()$fct_cnt >= 2) { # nolint: line_length_linter.
+    # if (er_cols_selected()$num_cnt == 0 &&
+    #     er_cols_selected()$fct_cnt >= 2) {
 
-        potential_viztype_choice <- potential_viztype_choice %>%
-            append("Barplot (Separate)")
+    #     potential_viztype_choice <- potential_viztype_choice %>%
+    #         append("Barplot (Separate)")
 
-    }
+    # }
 
     if (er_cols_selected()$num_cnt == 1 &&
         er_cols_selected()$fct_cnt >= 0 &&
         er_cols_selected()$fct_cnt <= 2) {
-
         potential_viztype_choice <- potential_viztype_choice %>%
             append("Histogram/Density Plot")
     }
 
-    if (er_cols_selected()$num_cnt == 1 &&
-        er_cols_selected()$fct_cnt >= 1 &&
-        er_cols_selected()$fct_cnt <= 2) {
-
-        potential_viztype_choice <- potential_viztype_choice %>%
-            append("Box plot/Violin Plot")
-    }
+    # could be developed in another version
+    # if (er_cols_selected()$num_cnt == 1 &&
+    #     er_cols_selected()$fct_cnt >= 1 &&
+    #     er_cols_selected()$fct_cnt <= 2) {
+    #     potential_viztype_choice <- potential_viztype_choice %>%
+    #         append("Box plot/Violin Plot")
+    # }
 
     if ((er_cols_selected()$num_cnt == 2 && er_cols_selected()$fct_cnt == 0) ||
         (er_cols_selected()$num_cnt == 2 && er_cols_selected()$fct_cnt == 1) ||
         (er_cols_selected()$num_cnt == 3 && er_cols_selected()$fct_cnt == 0) ||
         (er_cols_selected()$num_cnt == 3 && er_cols_selected()$fct_cnt == 1) ||
         (er_cols_selected()$num_cnt == 4 && er_cols_selected()$fct_cnt == 0)) {
-
         potential_viztype_choice <- potential_viztype_choice %>%
             append("Scatter Plot")
     }
 
     if ((er_cols_selected()$num_cnt == 2 && er_cols_selected()$fct_cnt == 0) ||
         (er_cols_selected()$num_cnt == 2 && er_cols_selected()$fct_cnt == 1)) {
-
         potential_viztype_choice <- potential_viztype_choice %>%
             append("2D Density Plot")
     }
@@ -130,7 +127,6 @@ output$er_viztype_selector <- renderUI({
         (er_cols_selected()$num_cnt == 4 && er_cols_selected()$fct_cnt == 0) ||
         (er_cols_selected()$num_cnt == 4 && er_cols_selected()$fct_cnt == 1) ||
         (er_cols_selected()$num_cnt == 5 && er_cols_selected()$fct_cnt == 0)) {
-
         potential_viztype_choice <- potential_viztype_choice %>%
             append("3D Scatter Plot")
     }
@@ -216,12 +212,12 @@ er_control_from_viztype <- reactive({
     ) {
         res$note <- list(
             tags$ul(
-                tags$li("Please select some variables") # nolint: line_length_linter.
+                tags$li("Please select some variables")
             )
         )
         res$controller <- list(
             tags$ul(
-                tags$li("Please select some variables") # nolint: line_length_linter.
+                tags$li("Please select some variables")
             )
         )
         return(res)
@@ -230,20 +226,118 @@ er_control_from_viztype <- reactive({
     if (input$er_viztype_selected == "Pairwise EDA") {
         res$note <- list(
             tags$ul(
-                tags$li("This visualisation may be VERY TIME COMSUMING"), # nolint
-                tags$li("Pairwise EDA explore the relationship between each pair of variables"),  # nolint
-                tags$li("An categorical variable can be chosen to group the data in different colours. Normally, this should be the predicted variable") # nolint
+                tags$li("This visualisation may be VERY TIME COMSUMING"),
+                tags$li("Pairwise EDA explore the relationship between each pair of variables"),
+                tags$li("An discrete variable can be chosen to group the data in different colours. Normally, this should be the predicted variable")
             )
         )
         res$controller <- list(
             pickerInput(
                 inputId = "er_eda_colour_var",
-                label = "Choose an categorical variable for different colours",
+                label = "Choose an discrete variable for different colours",
                 choices = c(er_cols_selected()$fct_vars, "None"),
-                options = list(
-                    size = 5,
-                    `live-search` = TRUE
-                )
+                selected = "None",
+                options = list(size = 5)
+            )
+        )
+        return(res)
+    }
+
+
+    # separate visualisation could be developed in latter version
+
+    # if (input$er_viztype_selected == "Histogram/Density Plot (Separate)") {
+    #     res$note <- list(
+    #         tags$ul(
+    #             tags$li("This visualisation compares distributions of different continuous variables in a same scale"),
+    #             tags$li("This visualisation considers different variables SEPARATELY"),
+    #         )
+    #     )
+    #     res$controller <- list(
+    #         awesomeRadio(
+    #             inputId = "er_histdens_sep_hd",
+    #             label = "Choose visualisation type",
+    #             choices = c("Histogram", "Density Plot"),
+    #             inline = TRUE
+    #         ),
+    #         awesomeRadio(
+    #             inputId = "er_histdens_sep_cy",
+    #             label = "Choose display method",
+    #             choices = c("Colour", "Y-axis"),
+    #             inline = TRUE
+    #         )
+    #     )
+    #     return(res)
+    # }
+
+    if (input$er_viztype_selected == "Histogram/Density Plot") {
+        res$note <- list(
+            tags$ul(
+                tags$li("This visualisation shows the density distribution of the target continuous variable"),
+                tags$li("A discrete variable or variables can be chosen to group the data and different groups can be illustrated on the dimensions of the y-axis or colours ") # nolint: line_length_linter.
+            )
+        )
+        res$controller <- list(
+            awesomeRadio(
+                inputId = "er_histdens_type",
+                label = "Choose visualisation type",
+                choices = c("Histogram", "Density Plot"),
+                inline = TRUE
+            ),
+            pickerInput(
+                inputId = "er_histdens_yaxis",
+                label = "Choose an discrete variable for y-axis",
+                choices = c(er_cols_selected()$fct_vars, "None"),
+                selected = "None",
+                options = list(size = 5)
+            ),
+            pickerInput(
+                inputId = "er_histdens_colour",
+                label = "Choose an discrete variable for different the colour",
+                choices = c(er_cols_selected()$fct_vars, "None"),
+                selected = "None",
+                options = list(size = 5)
+            )
+        )
+        return(res)
+    }
+
+    if (input$er_viztype_selected == "Scatter Plot") {
+        res$note <- list(
+            tags$ul(
+                tags$li("This is one of the most commenly used visualisation for relationship between two continous variables"),
+                tags$li("A discrete variable can be chosen to group the data and different groups can be illustrated on different colours"), # nolint: line_length_linter.
+                tags$li("A continuous variable can be projected to sizes of points") # nolint: line_length_linter.
+            )
+        )
+        res$controller <- list(
+            pickerInput(
+                inputId = "er_scatter_xaxis",
+                label = "Choose an continuous variable x-axis",
+                choices = er_cols_selected()$num_vars,
+                selected = er_cols_selected()$num_vars[1],
+                options = list(size = 5)
+            ),
+            pickerInput(
+                inputId = "er_scatter_yaxis",
+                label = "Choose an continuous variable y-axis",
+                choices = er_cols_selected()$num_vars,
+                selected = er_cols_selected()$num_vars[2],
+                options = list(size = 5)
+            ),
+            pickerInput(
+                inputId = "er_scatter_colour",
+                label = "Choose an variable for colour",
+                choices = c(er_cols_selected()$all_vars, "None"),
+                selected = "None",
+                options = list(size = 5)
+            ),
+            pickerInput(
+                inputId = "er_scatter_size",
+                label = "Choose an continous variable for size",
+                choices = c(er_cols_selected()$num_vars, "None"),
+                selected = "None",
+                options = list(size = 5)
             )
         )
         return(res)
@@ -251,16 +345,15 @@ er_control_from_viztype <- reactive({
 
     res$note <- list(
         tags$ul(
-            tags$li("UNDER CONSTRUCTION, TO BE CHANGED!!") # nolint: line_length_linter.
+            tags$li("UNDER CONSTRUCTION, TO BE CHANGED!!")
         )
     )
     res$controller <- list(
         tags$ul(
-            tags$li("UNDER CONSTRUCTION, TO BE CHANGED!!") # nolint: line_length_linter.
+            tags$li("UNDER CONSTRUCTION, TO BE CHANGED!!")
         )
     )
     return(res)
-
 })
 
 
@@ -284,18 +377,38 @@ output$er_control2 <- renderUI({
         return()
     }
 
-    box(
-        width = 12,
-        title = "Parameters this Visualisation",
-        status = "primary",
-        er_control_from_viztype()$controller,
-        actionButton(
-            inputId = "er_plot_confirm",
-            label = "Submit",
-            class = "btn-primary"
+    list(
+        box(
+            width = 12,
+            title = "Parameters for Visualisation",
+            status = "primary",
+            er_control_from_viztype()$controller,
+
+            actionButton(
+                inputId = "er_plot_confirm",
+                label = "Submit",
+                class = "btn-primary"
+            )
+        ),
+        box(
+            width = 12,
+            title = "Parameters for Plot Output",
+            status = "primary",
+            p("Responsive Change"),
+            numericInput(
+                inputId = "er_mainplot_width",
+                label = "Set Width (in pixels, 0 means default value)",
+                value = 0,
+                min = 0
+            ),
+            numericInput(
+                inputId = "er_mainplot_height",
+                label = "Set Height (in pixels, 0 means default value)",
+                value = 0,
+                min = 0
+            )
         )
     )
-
 })
 
 # prepare selected data
@@ -319,8 +432,8 @@ er_graph <- eventReactive(input$er_plot_confirm, {
         return(graph)
     }
 
-    if (input$er_viztype_selected == "Pairwise EDA") {
 
+    if (input$er_viztype_selected == "Pairwise EDA") {
         if (input$er_eda_colour_var == "None") {
             graph <- er_maindata_rows_selected() %>%
                 ggpairs(
@@ -334,15 +447,137 @@ er_graph <- eventReactive(input$er_plot_confirm, {
                 )
         }
 
-        graph <- graph %>%
-            ggplotly(width = 800, height = 800)
         return(graph)
     }
 
-    graph <- h3("UNDER CONSTRUCTION, TO BE CHANGED!!")
-    return(graph)
-})
+    # separate visualisation could be developed in latter version
+    # if (input$er_viztype_selected == "Histogram/Density Plot (Separate)") {
 
+    # }
+
+    if (input$er_viztype_selected == "Histogram/Density Plot") {
+
+        if (input$er_histdens_type == "Histogram") {
+            fc_diag <- ggally_barDiag
+            fc_facet <- ggally_facethist
+        }
+
+        if (input$er_histdens_type == "Density Plot") {
+            fc_diag <- ggally_densityDiag
+            fc_facet <- ggally_facetdensitystrip
+        }
+
+        if (input$er_histdens_yaxis == "None" &&
+            input$er_histdens_colour == "None") {
+
+            graph <- er_maindata_rows_selected() %>%
+                fc_diag(mapping = aes(
+                    x = .data[[er_cols_selected()$num_vars]],
+                    alpha = .5
+                ))
+            return(graph)
+        }
+
+        if (input$er_histdens_yaxis == "None" &&
+            input$er_histdens_colour != "None") {
+
+            graph <- er_maindata_rows_selected() %>%
+                fc_diag(mapping = aes(
+                    x = .data[[er_cols_selected()$num_vars]],
+                    color = .data[[input$er_histdens_colour]],
+                    alpha = .5
+                ))
+            return(graph)
+        }
+
+        if (input$er_histdens_yaxis != "None" &&
+            input$er_histdens_colour == "None") {
+
+            graph <- er_maindata_rows_selected() %>%
+                fc_facet(mapping = aes(
+                    x = .data[[er_cols_selected()$num_vars]],
+                    y = .data[[input$er_histdens_yaxis]],
+                    alpha = .5
+                ))
+            return(graph)
+        }
+
+        if (input$er_histdens_yaxis != "None" &&
+            input$er_histdens_colour != "None") {
+
+            graph <- er_maindata_rows_selected() %>%
+                fc_facet(mapping = aes(
+                    x = .data[[er_cols_selected()$num_vars]],
+                    y = .data[[input$er_histdens_yaxis]],
+                    color = .data[[input$er_histdens_colour]],
+                    alpha = .5
+                ))
+            return(graph)
+        }
+    }
+
+    if (input$er_viztype_selected == "Scatter Plot") {
+
+        if (input$er_scatter_colour == "None" &&
+            input$er_scatter_size == "None") {
+            graph <- ggplot(
+                    er_maindata_rows_selected(),
+                    aes(
+                        x = .data[[input$er_scatter_xaxis]],
+                        y = .data[[input$er_scatter_yaxis]],
+                        alpha = .5
+                    )
+                ) + geom_point()
+            # graph <- graph %>% ggMarginal(type = "density")
+            return(graph)
+        }
+
+        if (input$er_scatter_colour != "None" &&
+            input$er_scatter_size == "None") {
+            graph <- ggplot(
+                    er_maindata_rows_selected(),
+                    aes(
+                        x = .data[[input$er_scatter_xaxis]],
+                        y = .data[[input$er_scatter_yaxis]],
+                        color = .data[[input$er_scatter_colour]],
+                        alpha = .5
+                    )
+                ) + geom_point()
+            # graph <- graph %>% ggMarginal(type = "density")
+            return(graph)
+        }
+
+        if (input$er_scatter_colour == "None" &&
+            input$er_scatter_size != "None") {
+            graph <- ggplot(
+                    er_maindata_rows_selected(),
+                    aes(
+                        x = .data[[input$er_scatter_xaxis]],
+                        y = .data[[input$er_scatter_yaxis]],
+                        size = .data[[input$er_scatter_size]],
+                        alpha = .5
+                    )
+                ) + geom_point()
+            # graph <- graph %>% ggMarginal(type = "density")
+            return(graph)
+        }
+
+         if (input$er_scatter_colour != "None" &&
+            input$er_scatter_size != "None") {
+            graph <- ggplot(
+                    er_maindata_rows_selected(),
+                    aes(
+                        x = .data[[input$er_scatter_xaxis]],
+                        y = .data[[input$er_scatter_yaxis]],
+                        color = .data[[input$er_scatter_colour]],
+                        size = .data[[input$er_scatter_size]],
+                        alpha = .5
+                    )
+                ) + geom_point()
+            # graph <- graph %>% ggMarginal(type = "density")
+            return(graph)
+        }
+    }
 
 output$er_mainplot <- renderUI({
     if (file_state() != "right_file") {
@@ -352,10 +587,12 @@ output$er_mainplot <- renderUI({
     box(
         id = "er_mainplot_box",
         width = 12,
-        # height = 800,
-        title = "Parameters this Visualisation",
+        title = "Main Plot (This is Interactive!)",
         status = "primary",
         solidHeader = TRUE,
-        er_graph()
+        fc_ggplotly_if_gg_else_value(er_graph(),
+            width = fc_null_if_zero(input$er_mainplot_width),
+            height = fc_null_if_zero(input$er_mainplot_height)
+        )
     )
 })

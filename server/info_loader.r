@@ -1,6 +1,6 @@
-regex_netlogo_version <- "BehaviorSpace results \\((NetLogo [0-9.]+)\\)" # nolint
-regex_netlogo_filename <- "^(.*\\.nlogo$)" # nolint
-regex_behaviorspace_time <- "(\\d{2}/\\d{2}/\\d{4} \\d{2}:\\d{2}:\\d{2}:\\d{3} .\\d{4})" # nolint
+regex_netlogo_version <- "BehaviorSpace results \\((NetLogo [0-9.]+)\\)"
+regex_netlogo_filename <- "^(.*\\.nlogo$)"
+regex_behaviorspace_time <- "(\\d{2}/\\d{2}/\\d{4} \\d{2}:\\d{2}:\\d{2}:\\d{3} .\\d{4})"
 
 # load value
 

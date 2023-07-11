@@ -3,7 +3,12 @@ ts_endingresult_state <- reactive({
     if (file_state() != "right_file") {
         return()
     }
-    max(maindata()$data[maindata()$colnum$run]) == nrow(maindata()$data) || length(intersect(maindata()$colnum$msr_metrics, maindata()$colnum$num)) == 0 # nolint: line_length_linter.
+
+    max(
+        maindata()$data[maindata()$colnum$run]) == nrow(maindata()$data) ||
+        length(intersect(maindata()$colnum$msr_metrics, maindata()$colnum$num)
+    ) == 0
+
     # True: is endingresult
     # False: is timeseries
 })
@@ -25,8 +30,8 @@ output$file_state_page_timeseries <- renderUI({
                     solidHeader = TRUE,
                     status = "warning",
                     tags$h4(
-                        "The CSV file only contains the ending result of each run or doesn't contain valid measurement metrics data. Enable the 'Measure runs at every step' in BehaviorSpace or include valid output if you want to observe the data for each step", # nolint
-                        style = "color: orange" # nolint
+                        "The CSV file only contains the ending result of each run or doesn't contain valid measurement metrics data. Enable the 'Measure runs at every step' in BehaviorSpace or include valid output if you want to observe the data for each step", # nolint: line_length_linter.
+                        style = "color: orange"
                     )
                 )
             )
@@ -82,8 +87,8 @@ ts_maindata <- reactive({
         pivot_wider(
             names_from = 1,
             values_from = c(3:(2 + length(res$ptlvar))),
-            id_cols = `[step]`, # nolint: object_name_linter.
-            names_glue = "run_{`[run number]`}_{.value}", # nolint: object_name_linter, line_length_linter.
+            id_cols = `[step]`,
+            names_glue = "run_{`[run number]`}_{.value}",
         )
 
     print("")
@@ -100,8 +105,8 @@ output$ts_viztype_radio <- renderUI({
 
     radioGroupButtons(
         inputId = "ts_viztype_choice",
-        label = "Choose the visualisation type", # nolint: object_name_linter.
-        choices = c("Basic", "##Potential Placeholder##"), # nolint: object_name_linter, line_length_linter.
+        label = "Choose the visualisation type",
+        choices = c("Basic", "##Potential Placeholder##"),
         status = "primary",
         justified = TRUE,
         individual = TRUE
@@ -114,13 +119,13 @@ output$ts_typenote <- renderUI({
     }
 
     res <- list(
-        tags$p(tags$strong("Note on this type of visualisation:")) # nolint
+        tags$p(tags$strong("Note on this type of visualisation:"))
     )
 
-    if (input$ts_viztype_choice == "Basic") { # nolint: line_length_linter.
+    if (input$ts_viztype_choice == "Basic") {
         res[[length(res) + 1]] <- tags$ul(
-            tags$li("Only numeric variables in measurement metric data can be visualised in time series form"), # nolint: line_length_linter, object_name_linter, object_length_linter.
-            tags$li("Carefully determine whether different variables need to be presented on different scales before choosing whether to add a second Y-axis") # nolint: line_length_linter, object_name_linter, object_length_linter.
+            tags$li("Only numeric variables in measurement metric data can be visualised in time series form"),
+            tags$li("Carefully determine whether different variables need to be presented on different scales before choosing whether to add a second Y-axis")
         )
         return(res)
     }
@@ -167,7 +172,7 @@ output$ts_control1 <- renderUI({
                 class = "btn-primary"
             )
         )
-    } # nolint: line_length_linter.
+    }
 })
 
 ts_basic_existing <- reactiveVal(
@@ -189,9 +194,9 @@ ts_basic_graph <- reactive({
         # find the selected column in prepared data
         c("[step]", ts_basic_existing()$var_name)
     ] %>%
-        # fliter rows to delete all row are NAs (some column not selected may have many rows) # nolint: line_length_linter.
+        # fliter rows to delete all row are NAs (some column not selected may have many rows)
         filter(
-            if_any(2:(1 + length(ts_basic_existing()$var_name)), ~ !is.na(.)) # nolint: line_length_linter.
+            if_any(2:(1 + length(ts_basic_existing()$var_name)), ~ !is.na(.))
         ) %>%
         dygraph()
 
@@ -224,7 +229,7 @@ ts_basic_graph <- reactive({
 
 observeEvent(input$ts_basic_add_submit, {
     if (!is.null(input$ts_basic_add_runnum) &&
-        input$ts_basic_add_runnum > ts_maindata()$maxrun) { # nolint: line_length_linter.
+        input$ts_basic_add_runnum > ts_maindata()$maxrun) {
         shinyalert(
             title = "Error",
             text = "The run number is out of range",
@@ -242,7 +247,7 @@ observeEvent(input$ts_basic_add_submit, {
         )
     } else {
         new_log <- data.frame(
-            var_name = paste0("run_", input$ts_basic_add_runnum, "_", input$ts_basic_add_var), # nolint: line_length_linter.
+            var_name = paste0("run_", input$ts_basic_add_runnum, "_", input$ts_basic_add_var),
             type = input$ts_basic_add_type,
             colour = input$ts_basic_add_colour,
             yaxis = 1
@@ -267,7 +272,7 @@ observeEvent(input$ts_basic_add_submit, {
         } else {
             # renew the value
             ts_basic_existing(
-                ts_basic_existing() %>% rbind(new_log) # nolint: line_length_linter.
+                ts_basic_existing() %>% rbind(new_log)
             )
             print(ts_basic_existing)
 
@@ -328,8 +333,8 @@ output$ts_control2 <- renderUI({
                 ),
                 actionButton(
                     inputId = "ts_basic_y2_confirm",
-                    label = "Scale this Input in 2nd Y-axis", # nolint: object_name_linter, line_length_linter.
-                    class = "btn-primary" # nolint: object_name_linter.
+                    label = "Scale this Input in 2nd Y-axis",
+                    class = "btn-primary"
                 ),
                 awesomeRadio(
                     inputId = "ts_basic_y1_choice",
@@ -338,10 +343,10 @@ output$ts_control2 <- renderUI({
                 ),
                 actionButton(
                     inputId = "ts_basic_y1_confirm",
-                    label = "Scale this Input in 2nd Y-axis", # nolint: object_name_linter, line_length_linter.
-                    class = "btn-primary" # nolint: object_name_linter.
+                    label = "Scale this Input in 2nd Y-axis",
+                    class = "btn-primary"
                 ),
-                p("Note: All inputs are scaled on the 2nd Y-axis together."), # nolint: line_length_linter, object_name_linter.
+                p("Note: All inputs are scaled on the 2nd Y-axis together."),
                 actionButton(
                     inputId = "ts_basic_empty",
                     label = "Empty the Chart",
